@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VoxAid - Dyslexia-Friendly App</title>
+  <link rel="stylesheet" href="Vox Aid Style.css">
+</head>
+<body>
+ 
+  <header>
+    <h1>VoxAid</h1>
+    <h2>Dyslexia-Friendly App</h2>
+  </header>
+
+  <nav>
+    <button id="home-link">Home</button>
+    <button id="daily-exercise-link">Daily Exercise</button>
+    <button id="short-stories-link">Short Stories</button>
+    <button id="spelling-link">Spelling</button>
+  </nav>
+
+
+  <section id="home-section" class="page-section">
+    <p>Welcome to VoxAid, your dyslexia-friendly companion app.</p>
+    <div>
+      <label for="text-input">Enter text to read aloud:</label>
+      <input type="text" id="text-input" placeholder="Type something here...">
+      <button id="read-button">Read Aloud</button>
+    </div>
+  </section>
+ 
+  <section id="daily-exercise-section" class="page-section" style="display: none;">
+    <h3>Today's Word</h3>
+    <p id="exercise-word"></p>
+    <button id="word-activate-button">Listen to Word</button>
+
+    <h3>Today's Phrase</h3>
+    <p id="exercise-phrase"></p>
+    <button id="phrase-activate-button">Listen to Phrase</button>
+  </section>
+
+
+  <section id="short-stories-section" class="page-section" style="display: none;">
+    <h3>Short Stories</h3>
+    <input type="text" id="search-bar" placeholder="Search for stories..." />
+    <button id="search-button">Search Story</button>
+    <div id="stories-list">
+    </div>
+  </section>
+  <section id="spelling-section" class="page-section" style="display: none;">
+    <h3>Spelling Practice</h3>
+    <p>Click "Play Word" to hear the word, then type it below and check your answer.</p>
+    
+    <button id="play-word-button">Play Word</button>
+    <input type="text" id="spelling-input" placeholder="Type the word here...">
+    <button id="check-spelling-button">Check Spelling</button>
+    <button id="hint-button">Hint</button>
+
+    <p id="feedback-message"></p>
+</section>
+
+
+  <script src="VoxAid Js.js"></script>
+</body>
+</html>

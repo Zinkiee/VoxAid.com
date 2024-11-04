@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Clockmaker’s Apprentice</title>
+    <link rel="stylesheet" href="Vox Aid Style.css">
+    <style>
+        body {
+            font-family: Comic Sans Ms, sans-serif;
+            background-color: #f3f7fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        header {
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            background-color: #004d61;
+            color: #f3f7fa;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        main {
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        #story-container {
+            background-color: #e3f2fd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.2s ease;
+        }
+
+        #story-title {
+            font-size: 2em;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        #story-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            text-align: justify;
+            color: #333;
+        }
+
+        .highlight {
+            background-color: yellow;
+        }
+
+        .nav-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        label, select {
+            font-size: 1em;
+            color: #333;
+        }
+
+        select {
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: white;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #004d61;
+            color: #f3f7fa;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #00738e;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>The Clockmaker’s Apprentice</h1>
+    </header>
+
+    <main>
+        <div class="nav-bar">
+            <label for="font-select">Choose font:</label>
+            <select id="font-select">
+                <option value="Comic Sans MS">Comic Sans MS</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Arial">Arial</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Georgia">Georgia</option>
+                <option value="Open Dyslexic">Open Dyslexic</option>
+                <option value="Tahoma">Tahoma</option>
+            </select>
+            <label for="letter-spacing">Letter Spacing:</label>
+            <select id="letter-spacing">
+                <option value="normal">Normal</option>
+                <option value="0.05em">Slightly Spaced</option>
+                <option value="0.1em">More Spaced</option>
+            </select>
+            <label for="line-spacing">Line Spacing:</label>
+            <select id="line-spacing">
+                <option value="1.6">1.5x</option>
+                <option value="1.8">1.8x</option>
+                <option value="2">Double</option>
+            </select>
+            <button id="highlight-button">Highlight Text</button>
+            <button id="read-along-button">Read Along</button>
+        </div>
+
+        <section id="story-container">
+            <h2 id="story-title">The Clockmaker’s Apprentice</h2>
+            <div id="story-content">
+                <p>Thomas had always admired Mr. Arden’s clocks, each one more intricate and beautiful than the last. On his first day as an apprentice, he noticed one clock that was different from the rest—its hands moved backward, silently counting down to something unknown. When he asked about it, Mr. Arden warned him, saying, “This clock tells of lost chances.” Intrigued, Thomas couldn’t help but wind it up, and for a brief moment, he glimpsed scenes from his own life—paths he hadn’t taken, words he hadn’t said, moments lost forever.</p>
+
+                    <p>The visions haunted Thomas, reminding him of choices he’d avoided out of fear or uncertainty. From that day forward, he approached life with newfound courage, determined not to let time slip by unnoticed. His experiences became the inspiration for the clocks he crafted, each one holding a unique symbol of the paths he’d chosen to walk. Years later, he thanked the mysterious clock, knowing it had taught him the value of each fleeting moment.</p>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        document.getElementById('font-select').addEventListener('change', function() {
+            document.body.style.fontFamily = this.value;
+        });
+
+        document.getElementById('letter-spacing').addEventListener('change', function() {
+            document.getElementById('story-content').style.letterSpacing = this.value;
+        });
+
+        document.getElementById('line-spacing').addEventListener('change', function() {
+            document.getElementById('story-content').style.lineHeight = this.value;
+        });
+
+        document.getElementById('highlight-button').addEventListener('click', function() {
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                const span = document.createElement('span');
+                span.className = 'highlight';
+                range.surroundContents(span);
+            } else {
+                alert("Please select text to highlight.");
+            }
+        });
+
+        document.getElementById('read-along-button').addEventListener('click', function() {
+            const content = document.getElementById('story-content').innerText;
+            const sentences = content.split('.').map(sentence => sentence.trim()).filter(Boolean);
+            let index = 0;
+
+            function readSentence() {
+                if (index < sentences.length) {
+                    const sentence = sentences[index];
+                    const utterance = new SpeechSynthesisUtterance(sentence);
+                    utterance.lang = 'en-US';
+                    utterance.onend = () => {
+                        index++;
+                        setTimeout(readSentence, 1000);
+                    };
+                    window.speechSynthesis.speak(utterance);
+                }
+            }
+            readSentence();
+        });
+    </script>
+</body>
+</html>
